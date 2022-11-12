@@ -1,0 +1,26 @@
+{% extends "core/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    {% for book in books %}
+        <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ book.cover_image.url }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ book.author }}</a>
+              <small class="text-muted">{{ book.date_posted|date:"F d, Y" }}</small>
+            </div>
+            <h2><a class="article-title" href="">{{ book.title }}</a></h2>
+            <p class="article-content">{{ book.content }}</p>
+          </div>
+
+        </article>
+    {% endfor %}
+  <div>
+  <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit">save</button>
+  </form>
+  
+</div>
+{% endblock content %}
